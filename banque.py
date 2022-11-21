@@ -28,7 +28,7 @@ def nouveau(entre):
 
 
 def login(login):
-    """ Fonction qui permet d'entrer dans une compte existante."""
+    """ Fonction qui permet d'entrer dans un compte existant."""
 
     while login == False:
         try:  # Try et except permet d'éviter un crash si un nom d'utilisateur invalide est entré.
