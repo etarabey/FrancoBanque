@@ -11,17 +11,20 @@ def nouveau(entre):
     while True:  # Boucle pour créer un nouveau compte.
         strnouveauutilisateur = input("Entrer votre nouveau nom d'utilisateur ici: ")
         if exists(
-                strnouveauutilisateur) == False:  # Vérifie si le nom d'utilisateur entrée existe dans le système ou non. S'il existe, un message apparaît pour informer l'utilisateur que le nom d'utilisateur est déjà pris.
+                strnouveauutilisateur) == False and strnouveauutilisateur != "":  # Vérifie si le nom d'utilisateur entrée existe dans le système ou non. S'il existe, un message apparaît pour informer l'utilisateur que le nom d'utilisateur est déjà pris.
             strmotdepasse = input("Entrer votre nouveau mot de passe ici: ")
+            if strmotdepasse == "": 
+                print("Le mot de passe ne peut pas être vide. Essayez encore.")
+                continue
             print("Bienvenue à ton nouveau compte!")
             with open(strnouveauutilisateur,
                       'a') as database:  # Permet d'écrire le mot de passe et un nouveau compte dans le ficher de texte de l'utilisateur.
                 database.write(strmotdepasse)
                 database.write("\n0\n")
             return strnouveauutilisateur, True  # Retourne le nouveau nom d'utilisateur dans le programme, ainsi que de rendre la variable login vrai.
-            break
         else:
-            print("Nom d'utilisateur est déjà pris. Essayez encore. ")
+            print("Nom d'utilisateur est déjà pris ou vous avez entrez un nom d'utilsateur vide.")
+            print("Essayez encore.")
 
 
 def login(login):
@@ -42,14 +45,12 @@ def login(login):
                         "Voulez-vous sortir par la suite? (Q ou q pour oui: ")  # Permet de sortir du menu de login.
                     if strsortie.lower() == "q":  # Permet de retourner deux str vides pour éviter un crash du programme.
                         return "", ""
-                        break
         except:
             print("Login a failli. Essayez encore avec un nouveau nom d'utilisateur. ")
             strsortie = input(
                 "Voulez-vous sortir? (Q ou q pour quitter, entrer n'importe quel autre entrée pour continuer: ")
             if strsortie.lower() == "q":
                 return "", ""  # Prévient que le programme fait un crash quand il retourne le nom d'utilisateur et rendre login vrai.
-                break
 
 
 def ajoute(fltajoute, intcarte, listvaleurs):
@@ -94,7 +95,6 @@ def Interet(strutil, intcarte):
                     fltintérêt = float(lstinteret[intcarte]) * (1 + (fltvalint / 2)) ** (
                                 intvaltemps * 2)  # Calcule de l'intérêt.
                     return fltintérêt, intvaltemps  # Retourne l'intérêt et le temps au programme principale.
-                break
             else:
                 print("Une/deux des données sont invalides Essayez encore.")
         except:
@@ -186,6 +186,5 @@ def changementindex(intorgchoix, listcomptes):
     except:
         print("Donnée invalide. Essaye encore.")
         return intorgchoix
-
 
 
